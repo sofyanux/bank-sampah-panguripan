@@ -20,7 +20,12 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'username',
         'password',
+        'no_hp',
+        'saldo',
+        'alamat',
+        'role',
     ];
 
     /**
@@ -42,4 +47,50 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class, 'user_id');
+    }
+
+    public function tabungan()
+    {
+        return $this->hasMany(Tabungan::class, 'user_id');
+    }
+
+    public function penukaran()
+    {
+        return $this->hasMany(Penukaran::class, 'user_id');
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'user_id');
+    }
+
+    public function notifikasi()
+    {
+        return $this->hasMany(Notifikasi::class, 'user_id');
+    }
+
+    public function laporanPenimbangan()
+    {
+        return $this->hasMany(LaporanPenimbangan::class, 'user_id');
+    }
+
+    public function laporanTransaksi()
+    {
+        return $this->hasMany(LaporanTransaksi::class, 'user_id');
+    }
+
+    public function pengeluaran()
+    {
+        return $this->hasMany(Pengeluaran::class, 'user_id');
+    }
+
+    public function pemasukan()
+    {
+        return $this->hasMany(Pemasukan::class, 'user_id');
+    }
 }
